@@ -1,0 +1,5 @@
+---
+- name: Installing Synwall module
+  hosts: synwall_h
+  roles:
+    - synwall

@@ -1,0 +1,82 @@
+---
+# tasks file for synwall
+
+# get module
+- name: Block
+  block:
+    - name: Get source from git repo (on taget)
+      git:
+        repo: "{{ source }}"
+        dest: "{{ destination }}"
+        accept_hostkey: yes
+        force: yes
+      when: ( installation == "git" )
+    
+    - name: Get source code / compiled from local {{ source }}
+      copy:
+        src: "{{ source }}"
+        dest: "{{ destination }}"
+      when: ( installation == "source" ) or ( installation == "compiled" )
+
+# compile module
+- name: Compiling module
+  block:
+
+    - name: Compile synwall
+      shell: make clean && make -f Makefile
+      args:
+        chdir: "{{ destination }}"
+  
+  when: ( installation == "git" ) or ( installation == "source" )
+
+- name: copy synwall.ko in /lib/modules/{{ ansible_kernel }}/misc/
+  copy:
+    remote_src: yes
+    src: "{{destination}}SYNwall.ko"
+    dest: /lib/modules/{{ ansible_kernel }}/misc/
+  become: true
+
+- name: execute depmod
+  shell: depmod -a
+  become: true
+
+- name: create config file in /etc/modules-load.d
+  copy:
+    src: synwall.conf
+    dest: /etc/modules-load.d/
+  become: true
+
+# install module
+- name: install module
+  block:
+
+    - name: Install synwall module
+      shell: /sbin/modprobe SYNwall
+      args:
+        chdir: "{{ destination }}"
+      become: true
+
+  when: ( modprobe == True )
+
+# load module at boot
+- name: load module at boot with conf in modules-load.d
+  block:
+
+    - name: create parameters file in /etc/modprobe.d
+      template:
+        src: synwall.conf.j2
+        dest: /etc/modprobe.d/synwall.conf
+        owner: root
+        mode: u=rw,g=,o=
+      become: true
+
+  when: ( load_at_boot == "modules" )
+
+- name: load module at boot with cron
+  cron:
+    name: "insert module SYNwall"
+    job: "/sbin/modprobe SYNwall"
+    special_time: reboot
+    user: root
+  become: true
+  when: ( load_at_boot == "cron" )

@@ -1,0 +1,8 @@
+galaxy_info:
+  author: Miso Mijatovic, Cesare Pizzi
+  description: https://www.sorint.it/
+  company: Sorint.Lab
+
+  license: GPL-3.0
+
+  min_ansible_version: 2.4
