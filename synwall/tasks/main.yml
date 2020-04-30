@@ -40,10 +40,12 @@
   shell: depmod -a
   become: true
 
-- name: create config file in /etc/modules-load.d
-  copy:
-    src: synwall.conf
-    dest: /etc/modules-load.d/
+- name: create parameters file in /etc/modprobe.d
+  template:
+    src: synwall.conf.j2
+    dest: /etc/modprobe.d/synwall.conf
+    owner: root
+    mode: u=rw,g=,o=
   become: true
 
 # install module
@@ -62,12 +64,10 @@
 - name: load module at boot with conf in modules-load.d
   block:
 
-    - name: create parameters file in /etc/modprobe.d
-      template:
-        src: synwall.conf.j2
-        dest: /etc/modprobe.d/synwall.conf
-        owner: root
-        mode: u=rw,g=,o=
+    - name: create config file in /etc/modules-load.d
+      copy:
+        src: synwall.conf
+        dest: /etc/modules-load.d/
       become: true
 
   when: ( load_at_boot == "modules" )

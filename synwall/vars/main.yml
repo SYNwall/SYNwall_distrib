@@ -41,9 +41,9 @@ params:
   # Delay in starting up the module functionalities (ms)
   load_delay: 10000
   # List of ports for port knocking failsafe
-  portk:
-    - 0
-    - 0
-    - 0
-    - 0
-  portk_count: 0
+  #portk:
+  #  - 0
+  #  - 0
+  #  - 0
+  #  - 0
+  #  - 0
