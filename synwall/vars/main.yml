@@ -22,7 +22,9 @@ modprobe: True
 # - modules: puts the ko file in /lib/modules/'uname -r'/misc and creates a configuration file under /etc/modules-load.d
 # - cron: set the module to be loaded after boot time with cron
 # - any other value: it does nothing
-load_at_boot: modules
+load_at_boot: cron
+# optionally add a sleep before running modprobe at boot via cron, by default is 0
+sleep: 0
 
 # module params
 params:

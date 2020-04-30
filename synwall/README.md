@@ -23,6 +23,8 @@ Role Variables
   - cron: set the module to be loaded after boot time with cron
   - any other value: it does nothing
 
+- sleep: optionally add a sleep before running modprobe at boot via cron, by default is 0
+
 - module params, see module documentation for usage. the only mandatory value is the psk
 
       params:

@@ -75,7 +75,7 @@
 - name: load module at boot with cron
   cron:
     name: "insert module SYNwall"
-    job: "/sbin/modprobe SYNwall"
+    job: "/bin/sleep {{sleep}} && /sbin/modprobe SYNwall"
     special_time: reboot
     user: root
   become: true
