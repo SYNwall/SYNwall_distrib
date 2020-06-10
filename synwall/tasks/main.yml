@@ -1,6 +1,12 @@
 ---
 # tasks file for synwall
 
+# Try to unload existing module
+- name: Unload existing SYNwall module
+  command: /sbin/rmmod SYNwall
+  ignore_errors: yes
+  become: true
+
 # get module
 - name: Block
   block:
