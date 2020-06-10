@@ -31,7 +31,7 @@ params:
   # Pre-Shared Key used for the OneTimePassword
   psk: ""
   # Time precision parameter
-  precision: 1
+  precision: 10
   # Disable the OTP for outgoing packets
   disable_out: 0
   # Enable DoS protection
