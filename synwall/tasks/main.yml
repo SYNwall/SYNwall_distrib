@@ -3,8 +3,8 @@
 
 # Check for mandaroty variables
 - fail:
-    msg: Variable 'source' is not defined
-  when: source|length == 0
+    msg: Variable 'source' is not defined or zero length
+  when: (source is not defined) or (source|length == 0)
 - fail:
     msg: Variable 'psk' is not defined
   when: params.psk is undefined
