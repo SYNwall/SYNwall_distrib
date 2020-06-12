@@ -29,7 +29,7 @@ sleep: 0
 # module params
 params:
   # Pre-Shared Key used for the OneTimePassword
-  psk: ""
+  #psk: ""
   # Time precision parameter
   precision: 10
   # Disable the OTP for outgoing packets
