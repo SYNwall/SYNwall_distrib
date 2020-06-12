@@ -10,7 +10,7 @@ installation: git
 # if installation is git it should be the url to the repository
 # if installation is source it should be the path to the folder containing the source code (path must end with /)
 # if installation is compiled it should be the path to the compiled module (should be a .ko file)
-source:
+source: ""
 
 # absolute path to put source code or compiled (path must end with /)
 destination: /tmp/synwall/
@@ -29,7 +29,7 @@ sleep: 0
 # module params
 params:
   # Pre-Shared Key used for the OneTimePassword
-  psk:
+  psk: ""
   # Time precision parameter
   precision: 10
   # Disable the OTP for outgoing packets

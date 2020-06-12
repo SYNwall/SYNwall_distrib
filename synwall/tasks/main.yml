@@ -1,13 +1,13 @@
 ---
 # tasks file for synwall
 
-# Check for mandaroty variables
+# Check for mandatory variables
 - fail:
-    msg: Variable 'source' is not defined or zero length
-  when: (source is not defined) or (source|length == 0)
+    msg: Variable 'source' is empty
+  when: (source|length == 0)
 - fail:
-    msg: Variable 'psk' is not defined
-  when: params.psk is undefined
+    msg: Variable 'psk' is empty
+  when: (params.psk|length == 0)
 
 # Try to unload existing module
 - name: Unload existing SYNwall module
