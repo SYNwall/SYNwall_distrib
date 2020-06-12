@@ -4,7 +4,7 @@
 # Check for mandaroty variables
 - fail:
     msg: Variable 'source' is not defined
-  when: source is undefined
+  when: ( source == '' )
 - fail:
     msg: Variable 'psk' is not defined
   when: params.psk is undefined
