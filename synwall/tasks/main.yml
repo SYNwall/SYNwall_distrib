@@ -1,6 +1,14 @@
 ---
 # tasks file for synwall
 
+# Check for mandaroty variables
+- fail:
+    msg: Variable 'source' is not defined
+  when: source is undefined
+- fail:
+    msg: Variable 'psk' is not defined
+  when: psk is undefined
+
 # Try to unload existing module
 - name: Unload existing SYNwall module
   command: /sbin/rmmod SYNwall
