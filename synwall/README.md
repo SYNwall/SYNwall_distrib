@@ -8,6 +8,7 @@ Role Variables
   - git: every target will download the source from a git repo and compile it
   - source: you should provide the source code (on local machine) to the target which will compile it
   - compiled: you should provide the compiled module (on local machine) to the target
+  - none: no installtion will be performed, just parameter update (for example for key rolling)
 
 - source:
   - if installation is git it should be the url to the repository
