@@ -5,12 +5,13 @@
 # - git: every target will download the source from a git repo and compile it
 # - source: you should provide the source code (on local machine) to the target which will compile it
 # - compiled: you should provide the compiled module (on local machine) to the target
+# - none: no installtion will be performed, just parameter update (key rolling?)
 installation: git
 
 # if installation is git it should be the url to the repository
 # if installation is source it should be the path to the folder containing the source code (path must end with /)
 # if installation is compiled it should be the path to the compiled module (should be a .ko file)
-source:
+source: ""
 
 # absolute path to put source code or compiled (path must end with /)
 destination: /tmp/synwall/
@@ -31,7 +32,7 @@ params:
   # Pre-Shared Key used for the OneTimePassword
   psk: ""
   # Time precision parameter
-  precision: 1
+  precision: 10
   # Disable the OTP for outgoing packets
   disable_out: 0
   # Enable DoS protection

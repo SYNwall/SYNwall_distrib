@@ -1,6 +1,17 @@
 ---
 # tasks file for synwall
 
+# Check for mandatory variables
+- fail:
+    msg: Variable 'source' is empty
+  when: ( source|length == 0 ) and ( installation != "none" )
+
+# Try to unload existing module
+- name: Unload existing SYNwall module
+  command: /sbin/rmmod SYNwall
+  ignore_errors: yes
+  become: true
+
 # get module
 - name: Block
   block:
@@ -35,10 +46,12 @@
     src: "{{destination}}SYNwall.ko"
     dest: /lib/modules/{{ ansible_kernel }}/misc/
   become: true
+  when: ( installation != "none" )
 
 - name: execute depmod
   shell: depmod -a
   become: true
+  when: ( installation != "none" )
 
 - name: create parameters file in /etc/modprobe.d
   template:
@@ -57,8 +70,12 @@
       args:
         chdir: "{{ destination }}"
       become: true
+      when: ( modprobe == True ) and ( installation != "none" )
 
-  when: ( modprobe == True )
+    - name: Install synwall module
+      shell: /sbin/modprobe SYNwall
+      become: true
+      when: ( modprobe == True ) and ( installation == "none" )
 
 # load module at boot
 - name: load module at boot with conf in modules-load.d
@@ -70,7 +87,7 @@
         dest: /etc/modules-load.d/
       become: true
 
-  when: ( load_at_boot == "modules" )
+  when: ( load_at_boot == "modules" ) and ( installation != "none" )
 
 - name: load module at boot with cron
   cron:
@@ -79,4 +96,4 @@
     special_time: reboot
     user: root
   become: true
-  when: ( load_at_boot == "cron" )
+  when: ( load_at_boot == "cron" ) and ( installation != "none" )
