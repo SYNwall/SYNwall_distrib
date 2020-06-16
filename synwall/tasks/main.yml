@@ -5,9 +5,6 @@
 - fail:
     msg: Variable 'source' is empty
   when: ( source|length == 0 ) and ( installation != "none" )
-- fail:
-    msg: Variable 'psk' is empty
-  when: ( params.psk|length == 0 )
 
 # Try to unload existing module
 - name: Unload existing SYNwall module
