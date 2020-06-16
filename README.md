@@ -8,7 +8,7 @@ Populate inventory and use:
 
 See role README for details.
 
-# Manage ansible role with AWX
+# Manage Ansible role with AWX
 
 You can use this role, import it in AWX and manage your devices from there:
 
