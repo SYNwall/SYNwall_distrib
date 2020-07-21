@@ -29,19 +29,21 @@ Role Variables
 - module params, see module documentation for usage. the only mandatory value is the psk
 
       params:
-        \# Pre-Shared Key used for the OneTimePassword
+        # Pre-Shared Key used for the OneTimePassword
         psk: ""
-        \# Time precision parameter
+        # Time precision parameter
         precision: 1
-        \# Disable the OTP for outgoing packets
+        # Disable the OTP for outgoing packets
         disable_out: 0
-        \# Enable DoS protection
+        # Enable DoS protection
         enable_antidos: 0
-        \# Enable IP Spoofing protection
+        # Enable IP Spoofing protection
         enable_antispoof: 0
-        \# Delay in starting up the module functionalities (ms)
+        # Enable UDP protocol
+        enable_udp: 0
+        # Delay in starting up the module functionalities (ms)
         load_delay: 10000
-        \# List of ports for port knocking failsafe
+        # List of ports for port knocking failsafe
         portk:
           - 0
           - 0

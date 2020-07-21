@@ -39,6 +39,8 @@ params:
   enable_antidos: 0
   # Enable IP Spoofing protection
   enable_antispoof: 0
+  # Enable UDP protocol
+  enable_udp: 0
   # Delay in starting up the module functionalities (ms)
   load_delay: 10000
   # List of ports for port knocking failsafe
